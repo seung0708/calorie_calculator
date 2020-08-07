@@ -5,7 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-    Calorie.create(age: 27, gender: "male", weight: 195, height: 70, total_calories: 1800)
-
-    Goal.create(activity_level: 'sedentary', plan: "fat loss", calorie_id: 1)

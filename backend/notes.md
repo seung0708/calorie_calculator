@@ -1,10 +1,10 @@
 # Project Requirements
-[] The application must be an HTML, CSS, and JavaScript frontend
-[] with Rails API backend
-[] All interactions between the client and the server must be handled asynchronously(AJAX) 
-[] and use JSON as the communication format
-[] The JavaScript application must use Object Oriented JavaScript (classes) to encapsulate related data and behavior
-[] The domain model served by tht Rails backend must include a resource with at least one has-many relationship
+[x] The application must be an HTML, CSS, and JavaScript frontend
+[x] with Rails API backend
+[x] All interactions between the client and the server must be handled asynchronously(AJAX) 
+[x] and use JSON as the communication format
+[x] The JavaScript application must use Object Oriented JavaScript (classes) to encapsulate related data and behavior
+[x] The domain model served by tht Rails backend must include a resource with at least one has-many relationship
 [] The backned and frontend must collaborate to demonstrate Client-Server Communication.
 [] Your application should have at least 3 AJAX calls,
         [] covering at least 2 of CRUD 
@@ -17,11 +17,11 @@
 [] Use ES6 features when appropriate (e.g. arrow functions, let & const, rest and spread syntax)
 
 # Rails
-[] Follow Rails MVC and RESTful conventions. That means e.g.
-    [] a request GET/puppies out to be handled by the PuppiesController
-    [] fetch puppies form the database using a Puppy ActiveRecord model, and return a list of puppies as JSON
-[] Well-named variables and methods
-[] Short, single-puprose methods
+[x] Follow Rails MVC and RESTful conventions. That means e.g.
+    [x] a request GET/puppies out to be handled by the PuppiesController
+    [s] fetch puppies form the database using a Puppy ActiveRecord model, and return a list of puppies as JSON
+[x] Well-named variables and methods
+[x] Short, single-puprose methods
 
 # Git
 [] Aim for a large number of small commits - commit frequently!

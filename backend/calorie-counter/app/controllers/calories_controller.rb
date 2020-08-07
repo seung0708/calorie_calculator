@@ -5,20 +5,22 @@ class CaloriesController < ApplicationController
   def index
     @calories = Calorie.all
 
-    render json: @calories, status: 200
+    render json: @calories, include: [:goals], status: 200
   end
 
   # GET /calories/1
   def show
-    render json: @calorie, status: 200
+    render json: @calorie, include: [:goal], status: 200
   end
 
   # POST /calories
   def create
     #binding.pry
+    @goal = Goal.new(id: params[:id], activity_level: params[:activity_level])
     @calorie = Calorie.create(calory_params)
+    @calorie.goals << @goal
 
-    render json: @calorie, status: 200
+  render json: @calorie, status: 200
   end
 
   # PATCH/PUT /calories/1
@@ -43,6 +45,15 @@ class CaloriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def calory_params
-      params.require(:calory).permit(:age, :gender, :weight, :height, :total_calories)
+      params.require(:calory).permit(
+          :age, 
+          :gender, 
+          :weight, 
+          :height, 
+          :total_calories,
+          goals_attributes: [
+            :id,
+            :activity_level
+          ])
     end
 end

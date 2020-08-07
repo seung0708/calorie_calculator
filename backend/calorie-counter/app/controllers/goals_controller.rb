@@ -1,19 +1,16 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+class GoalsController < ApplicationController
+  before_action :set_goal, only: [:show, :update, :destroy]
 
-  # GET /users
   def index
     @goals = Goal.all
 
     render json: @goals
   end
 
-  # GET /users/1
   def show
     render json: @goal
   end
 
-  # POST /users
   def create
     @goal = Goal.new(goal_params)
 
@@ -24,7 +21,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
   def update
     if @goal.update(goal_params)
       render json: @goal
@@ -33,7 +29,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
   def destroy
     @goal.destroy
   end
@@ -46,6 +41,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def goal_params
-      params.require(:goal).permit(:activity_level, :plan)
+      params.require(:goal).permit(:activity_level)
     end
 end
