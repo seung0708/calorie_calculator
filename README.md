@@ -7,8 +7,8 @@ After the user hits submit, the result will be displayed just under the Reset bu
 
 * Ruby on Rails
 * HTML
-*CSS 
-*JavaScript 
+* CSS 
+* JavaScript 
 
 ### Getting Started 
   - Clone the repository
