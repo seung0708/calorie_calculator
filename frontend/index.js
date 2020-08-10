@@ -1,51 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
+    showResultsOnLoad()
+   
 })
 
 const BASE_URL = "http://localhost:3000/"
 
+// Form 
+function createForm() {
+    let caloriesForm = document.getElementById("caloriesForm")
+    
+    caloriesForm.innerHTML += 
+    `
+    <form id="myForm" onsubmit="showResultsOnLoad()">
+        <label>Age:</label><br />
+        <input type="number" id="age"><br />
+        <label>Gender</label><br />
+        <input type="text" id="gender"><br />
+        <label>Weight</label><br />
+        <input type="number" id="weight" placeholder="in Pounds"><br />
+        <label>Height</label><br />
+        <input type="number" id="height" placeholder="in Inches"><br />
+        <select id="activity_level"><br>
+            <option value="">Choose Your Activity level</option>
+            <option value="sedentary">Sedentary</option>
+            <option value="lightly active">Lightly Active</option>
+            <option value="moderately active"">Moderately Active</option>
+            <option value="active">Active</option>
+        </select><br />
+        <input type="submit" value="Calculate Calories" id="totalCalories" ><br />
+        <input type="button" value="Reset" onclick="window.location.reload()">
+    </form>
+    `
+    caloriesForm.addEventListener("submit", formSubmit)
+}
+
+// show results after form is submitted
+function showResultsOnLoad() {
+    let results = document.getElementById("results");
+    if (results.style.display === "none") {
+        results.style.display = "block";
+    } else {
+        results.style.display = "none"
+    }
+}
+
+
+// GET request
 function fetchCalories() {
     fetch(`${BASE_URL}calories`)
     .then(response => response.json())
     .then(calories => {
         for (const calorie of calories) {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-            c.renderCalorie();
         }
 
     })
 };
 
-function createForm() {
-    let caloriesForm = document.getElementById("calories-form")
-    
-    caloriesForm.innerHTML += 
-    `
-    <form>
-        <label>Age:</label><br />
-        <input type="number" id="age"><br />
-        <label>Gender</label><br />
-        <input type="text" id="gender"><br />
-        <label>Weight</label><br />
-        <input type="number" id="weight"><br />
-        <label>Height</label><br />
-        <input type="number" id="height"><br />
-        <select id="activity_level"><br>
-            <option value="sedentary">Sedentary</option>
-            <option value="lightly active">Lightly Active</option>
-            <option value="moderately active"">Moderately Active</option>
-            <option value="active">Active</option>
-        </select><br />
-        <input type="submit" value="Calculate Calories" id="total_calories"><br />
-    </form>
-    `
-    caloriesForm.addEventListener("submit", formSubmit)
-}
-
-
-
-
+// POST request
 function formSubmit() {
     event.preventDefault();
 
@@ -74,9 +88,11 @@ function formSubmit() {
     .then(response => response.json())
     .then(calorie => {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
-            console.log(c)
+            c.renderCalorie()
             
     })
-
- 
+    
 }
+
+
+

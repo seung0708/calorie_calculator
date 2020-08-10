@@ -5,12 +5,12 @@ class CaloriesController < ApplicationController
   def index
     @calories = Calorie.all
 
-    render json: @calories, include: [:goals], status: 200
+    render json: @calories, include: [:goals], exclude: [:created_at, :updated_at], status: 200
   end
 
   # GET /calories/1
   def show
-    render json: @calorie, include: [:goal], status: 200
+    render json: @calorie, include: [:goals], status: 200
   end
 
   # POST /calories
@@ -25,7 +25,7 @@ class CaloriesController < ApplicationController
 
   # PATCH/PUT /calories/1
   def update
-    @calorie.update(calorie_params)
+    @calorie.update(calory_params)
 
     render json: @calorie, status: 200
   end

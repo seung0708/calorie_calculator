@@ -3,18 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <title>CalorieCalculator</title>
         <script src="index.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
         <script src="src/calorie.js"></script>
         <script src="src/goal.js"></script>
         
     </head>
     <body>
-        <h1>Calorie Calculator</h1>
-        <div id="calories-form"></div>
-        <div id="calorie-container"></div>
-        <div id="goals-form"></div>
-        <div id="results"></div>
-        
+        <div id="caloriesForm" class="parent"> 
+            <h1>Calorie Calculator</h1>
+            <div id="results" class="child"></div>
+            <div id="updateCalories">
+
+            </div>
+        </div>
     </body>
 </html>

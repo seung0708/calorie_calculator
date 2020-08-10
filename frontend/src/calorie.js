@@ -1,5 +1,6 @@
 class Calorie {
     constructor(age, gender, weight, height, total_calories, activity_level) {
+  
         this.age = age;
         this.gender = gender;
         this.weight = weight;
@@ -13,13 +14,12 @@ class Calorie {
 
         caloriesResults.innerHTML += 
         `
-         <ul>
-            <li>${this.total_calories}</li>
+            <p id="total">${this.total_calories} calories</p>
 
-         </ul>
         `
     }
     static calculateCalories(age, gender, weight, height, activity_level) {
+
         if (gender === "male" && activity_level === "sedentary") 
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.2)
         else  if (gender === "male" && activity_level === "lightly active") 
@@ -28,7 +28,9 @@ class Calorie {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.55)
         else if (gender === "male" && activity_level === "active") 
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.9)
-
+        else if (gender === "male" & activity_level === ""){
+          return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))))
+        }
         else if (gender === "female" && activity_level === "sedentary")
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.2)
         else if (gender === "female" && activity_level === "lightly active")
