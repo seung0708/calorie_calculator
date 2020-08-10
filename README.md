@@ -3,14 +3,14 @@
 The Calorie Calculator is just like how it sounds. This is a simple form application where a user will input their data based on their age, gender, weight, height, and activity level. 
 After the user hits submit, the result will be displayed just under the Reset button 
 
-###Tech
+### Tech
 
 * Ruby on Rails
 * HTML
 *CSS 
 *JavaScript 
 
-###Getting Started 
+### Getting Started 
   - Clone the repository
      - ```https://github.com/seung0708/js_project.git```
   - Navigate to the backend calorie rails 
