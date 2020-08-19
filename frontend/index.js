@@ -2,12 +2,25 @@ document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
     showResultsOnLoad()
+    goalsForm()
    
 })
 
 const BASE_URL = "http://localhost:3000/"
 
-// Form 
+// GET request
+function fetchCalories() {
+    fetch(`${BASE_URL}calories`)
+    .then(response => response.json())
+    .then(calories => {
+        for (const calorie of calories) {
+            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
+        }
+
+    })
+};
+
+// Calories Form 
 function createForm() {
     let caloriesForm = document.getElementById("caloriesForm")
     
@@ -35,29 +48,6 @@ function createForm() {
     `
     caloriesForm.addEventListener("submit", formSubmit)
 }
-
-// show results after form is submitted
-function showResultsOnLoad() {
-    let results = document.getElementById("results");
-    if (results.style.display === "none") {
-        results.style.display = "block";
-    } else {
-        results.style.display = "none"
-    }
-}
-
-
-// GET request
-function fetchCalories() {
-    fetch(`${BASE_URL}calories`)
-    .then(response => response.json())
-    .then(calories => {
-        for (const calorie of calories) {
-            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-        }
-
-    })
-};
 
 // POST request
 function formSubmit() {
@@ -94,5 +84,62 @@ function formSubmit() {
     
 }
 
+// show results after form is submitted
+function showResultsOnLoad() {
+    let results = document.getElementById("results");
+    if (results.style.display === "none") {
+        results.style.display = "block";
+    } else {
+        results.style.display = "none"
+    }
+}
 
 
+function goalsForm() {
+    let goalsForm = document.getElementById("goals")
+
+    goalsForm.innerHTML += 
+    `
+    <form id="myGoals">
+        <select id="plan"><br>
+            <option value="">Choose Your Activity level</option>
+            <option value="fat loss">Fat Loss</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="gain">Gain weight</option>
+        </select><br />
+        <input type="submit" value="Update Calories" id="goalCalories" ><br />
+        <input type="button" value="Reset" onclick="window.location.reload()">
+    </form>
+    `
+    goalsForm.addEventListener("submit", formUpdate)   
+
+}
+
+function formUpdate {
+    event.preventDefault();
+
+    let total_calories = document.getElementById("total")
+    let plan = document.getElementById
+    
+    fetch(`${BASE_URL}calories`, {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            age: age, 
+            gender: gender,
+            weight: weight,
+            height: height,
+            total_calories: total_calories,
+            activity_level: activity_level
+        })
+    })
+    .then(response => response.json())
+    .then(calorie => {
+            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
+            c.renderCalorie()
+            
+    })
+    
+}
