@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
     showCaloriesResultsOnLoad()
-    goalsForm()
-    showGoalsResultsOnLoad()
+    //goalsForm()
+    //showGoalsResultsOnLoad()
    
 })
 
@@ -23,11 +23,11 @@ function fetchCalories() {
 
 // Calories Form 
 function createForm() {
-    let caloriesForm = document.getElementById("caloriesForm")
+    let caloriesForm = document.getElementById("container")
     
     caloriesForm.insertAdjacentHTML("beforeend",  
     `
-    <form id="myForm" onsubmit="showCaloriesResultsOnLoad()">
+    <form id="myForm">
         <label>Age:</label><br />
         <input type="number" id="age"><br />
         <label>Gender</label><br />
@@ -37,7 +37,7 @@ function createForm() {
         <label>Height</label><br />
         <input type="number" id="height" placeholder="in Inches"><br />
         <select id="activity_level"><br>
-            <option value="">Choose Your Activity level</option>
+            <option value="0">Choose Your Activity level</option>
             <option value="sedentary">Sedentary</option>
             <option value="lightly active">Lightly Active</option>
             <option value="moderately active"">Moderately Active</option>
@@ -87,17 +87,27 @@ function formSubmit() {
 
 // show results after form is submitted
 function showCaloriesResultsOnLoad() {
-    let results = document.getElementById("results");
+    /**let results = document.getElementById("results");
     if (results.style.display === "none") {
         results.style.display = "block";
     } else {
         results.style.display = "none"
     }
+    **/
+   let showResults = document.getElementById("total")
+
+   showResults.addEventListener("submit", function() {
+    if (results.style.display === "none") {
+        results.style.display = "block";
+    } else {
+        results.style.display = "none"
+    }
+   })
 }
 
 
 function goalsForm() {
-    let goalsForm = document.getElementById("caloriesForm")
+    let goalsForm = document.getElementById("container")
 
     goalsForm.insertAdjacentHTML("beforeend",
     `
@@ -136,10 +146,10 @@ function formUpdate() {
         })
     })
     .then(response => response.json())
-    .then(calorie => {
+    .then(goal => {
             let g = Goal.update(goal.id, goal.plan, goal.total_calories)    
             g.renderCalorie()
-            
+
     })
     
 }
