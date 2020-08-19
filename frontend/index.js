@@ -25,7 +25,7 @@ function fetchCalories() {
 function createForm() {
     let caloriesForm = document.getElementById("caloriesForm")
     
-    caloriesForm.innerHTML += 
+    caloriesForm.insertAdjacentHTML("beforeend",  
     `
     <form id="myForm" onsubmit="showCaloriesResultsOnLoad()">
         <label>Age:</label><br />
@@ -46,7 +46,7 @@ function createForm() {
         <input type="submit" value="Calculate Calories" id="totalCalories" ><br />
         <input type="button" value="Reset" onclick="window.location.reload()">
     </form>
-    `
+    `)
     caloriesForm.addEventListener("submit", formSubmit)
 }
 
@@ -122,7 +122,7 @@ function formUpdate() {
 
     let goal = document.getElementById("plan")
     let plan = goal.options[goal.selectedIndex].value
-    let total_calories = Goal.calculateGoals(plan, total_calories)
+    let total_calories = Goal.calculateGoals(plan)
     
     fetch(`${BASE_URL}goals/${id}`, {
         method: "PUT",
@@ -138,7 +138,7 @@ function formUpdate() {
     .then(response => response.json())
     .then(calorie => {
             let g = Goal.update(goal.id, goal.plan, goal.total_calories)    
-            g.renderGoal()
+            g.renderCalorie()
             
     })
     

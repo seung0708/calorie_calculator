@@ -23,6 +23,7 @@ class GoalsController < ApplicationController
 
   def update
     if @goal.update(goal_params)
+      binding.pry
       render json: @goal
     else
       render json: @goal.errors, status: :unprocessable_entity
@@ -44,8 +45,8 @@ class GoalsController < ApplicationController
       params.require(:goal).permit(
         :plan,
         :activity_level, 
-        calorie_attributes: [
-          :total_calories
+         calorie_attributes: [
+          total
       ])
     end
 end
