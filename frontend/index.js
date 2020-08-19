@@ -122,7 +122,7 @@ function formUpdate {
     let plan = document.getElementById
     
     fetch(`${BASE_URL}calories`, {
-        method: "POST",
+        method: "PUT",
         headers: {
             'content-type': 'application/json'
         },
