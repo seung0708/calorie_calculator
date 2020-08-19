@@ -10,7 +10,7 @@ class Calorie {
     }
 
     renderCalorie() {
-        let caloriesResults = document.getElementById("results")
+        let caloriesResults = document.querySelector("results")
 
         caloriesResults.innerHTML += 
         `
@@ -32,7 +32,7 @@ class Calorie {
         else if (gender === "male" && activity_level === "active") {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.9)
         }
-        else if (gender === "male" & activity_level === ""){
+        else if (gender === "male" & activity_level === "0"){
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))))
         }
         else if (gender === "female" && activity_level === "sedentary") {
@@ -47,7 +47,7 @@ class Calorie {
         else if (gender === "female" && activity_level === "active") {
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.9)
         }
-        else if (gender === "male" & activity_level === ""){
+        else if (gender === "male" & activity_level === "0"){
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))))
             }
         }    

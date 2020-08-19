@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
-    showCaloriesResultsOnLoad()
+    //showCaloriesResultsOnLoad()
+    //disableSubmit()
     //goalsForm()
     //showGoalsResultsOnLoad()
    
@@ -16,6 +17,7 @@ function fetchCalories() {
     .then(calories => {
         for (const calorie of calories) {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
+            c.renderCalorie
         }
 
     })
@@ -23,9 +25,9 @@ function fetchCalories() {
 
 // Calories Form 
 function createForm() {
-    let caloriesForm = document.getElementById("container")
+    let caloriesForm = document.getElementById("caloriesForm")
     
-    caloriesForm.insertAdjacentHTML("beforeend",  
+    caloriesForm.insertAdjacentHTML("afterbegin",  
     `
     <form id="myForm">
         <label>Age:</label><br />
@@ -43,7 +45,7 @@ function createForm() {
             <option value="moderately active"">Moderately Active</option>
             <option value="active">Active</option>
         </select><br />
-        <input type="submit" value="Calculate Calories" id="totalCalories" ><br />
+        <input type="submit" value="Calculate Calories" id="totalCalories"><br />
         <input type="button" value="Reset" onclick="window.location.reload()">
     </form>
     `)
@@ -79,31 +81,35 @@ function formSubmit() {
     .then(response => response.json())
     .then(calorie => {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
-            c.renderCalorie()
+            c.renderCalorie
             
     })
     
 }
 
-// show results after form is submitted
+/** 
 function showCaloriesResultsOnLoad() {
-    /**let results = document.getElementById("results");
-    if (results.style.display === "none") {
-        results.style.display = "block";
-    } else {
-        results.style.display = "none"
-    }
-    **/
-   let showResults = document.getElementById("total")
+   let showResults = document.getElementById("results")
 
    showResults.addEventListener("submit", function() {
-    if (results.style.display === "none") {
-        results.style.display = "block";
+    if (showResults.style.display === "none") {
+        showResults.style.display = "block";
     } else {
-        results.style.display = "none"
-    }
+        showResults.style.display = "none"
+    } 
    })
 }
+
+function disableSubmit() {
+    let submitBtn = document.getElementById("totalCalories");
+    submitBtn.onsubmit = submit;
+    function submit(event) {
+        form.setAttribute('hidden', '');
+        event.preventDefault();
+        }
+
+}
+**/
 
 
 function goalsForm() {
