@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
-    showResultsOnLoad()
+    showCaloriesResultsOnLoad()
     goalsForm()
+    showGoalsResultsOnLoad()
    
 })
 
@@ -26,7 +27,7 @@ function createForm() {
     
     caloriesForm.innerHTML += 
     `
-    <form id="myForm" onsubmit="showResultsOnLoad()">
+    <form id="myForm" onsubmit="showCaloriesResultsOnLoad()">
         <label>Age:</label><br />
         <input type="number" id="age"><br />
         <label>Gender</label><br />
@@ -85,7 +86,7 @@ function formSubmit() {
 }
 
 // show results after form is submitted
-function showResultsOnLoad() {
+function showCaloriesResultsOnLoad() {
     let results = document.getElementById("results");
     if (results.style.display === "none") {
         results.style.display = "block";
@@ -96,50 +97,58 @@ function showResultsOnLoad() {
 
 
 function goalsForm() {
-    let goalsForm = document.getElementById("goals")
+    let goalsForm = document.getElementById("caloriesForm")
 
-    goalsForm.innerHTML += 
+    goalsForm.insertAdjacentHTML("beforeend",
     `
     <form id="myGoals">
         <select id="plan"><br>
             <option value="">Choose Your Activity level</option>
-            <option value="fat loss">Fat Loss</option>
+            <option value="weightLoss">Fat Loss</option>
             <option value="maintenance">Maintenance</option>
             <option value="gain">Gain weight</option>
         </select><br />
         <input type="submit" value="Update Calories" id="goalCalories" ><br />
         <input type="button" value="Reset" onclick="window.location.reload()">
     </form>
-    `
+    `)
     goalsForm.addEventListener("submit", formUpdate)   
 
 }
 
-function formUpdate {
+//PUT Request
+function formUpdate() {
     event.preventDefault();
 
-    let total_calories = document.getElementById("total")
-    let plan = document.getElementById
+    let goal = document.getElementById("plan")
+    let plan = goal.options[goal.selectedIndex].value
+    let total_calories = Goal.calculateGoals(plan, total_calories)
     
-    fetch(`${BASE_URL}calories`, {
+    fetch(`${BASE_URL}goals/${id}`, {
         method: "PUT",
         headers: {
             'content-type': 'application/json'
         },
         body: JSON.stringify({
-            age: age, 
-            gender: gender,
-            weight: weight,
-            height: height,
-            total_calories: total_calories,
-            activity_level: activity_level
+            id: id,
+            plan: plan,
+            total_calories: total_calories
         })
     })
     .then(response => response.json())
     .then(calorie => {
-            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
-            c.renderCalorie()
+            let g = Goal.update(goal.id, goal.plan, goal.total_calories)    
+            g.renderGoal()
             
     })
     
+}
+
+function showGoalsResultsOnLoad() {
+    let goalResults = document.getElementById("goals");
+    if (goalResults.style.display === "none") {
+        goalResults.style.display = "block";
+    } else {
+        goalResults.style.display = "none"
+    }
 }

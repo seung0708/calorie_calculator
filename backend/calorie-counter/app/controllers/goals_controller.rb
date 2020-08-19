@@ -41,6 +41,11 @@ class GoalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def goal_params
-      params.require(:goal).permit(:activity_level)
+      params.require(:goal).permit(
+        :plan,
+        :activity_level, 
+        calorie_attributes: [
+          :total_calories
+      ])
     end
 end

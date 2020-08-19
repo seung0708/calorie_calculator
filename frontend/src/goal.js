@@ -6,7 +6,7 @@ class Goal {
         this.total_calories = total_calories
     }
 
-    renderCalorie() {
+    renderGoal() {
         let goalsResults = document.getElementById("goalResults")
 
         goalsResults.innerHTML += 
@@ -17,13 +17,15 @@ class Goal {
     }
 
     static calculateGoals(plan, total_calories) {
-        if (plan === 'weight loss') {
+        if (plan === 'weightLoss') {
             return Math.round(total_calories - 500)
         }
         else if (plan === 'maintenance' ) {
             return Math.round(total_calories)
         }
 
-        else if (plan === '')
+        else if (plan === 'gain') {
+            return Math.round(total_calories + 500)
+        }
     }
 }

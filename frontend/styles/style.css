@@ -31,9 +31,10 @@ h1 {
     bottom: 350px;
 }
 
-#updateCalories {
+#myGoals {
     text-align: center;
     position: absolute;
-    bottom: 50px;
+    bottom: 250px;
+
 }
 
