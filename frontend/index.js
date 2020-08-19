@@ -17,7 +17,7 @@ function fetchCalories() {
     .then(calories => {
         for (const calorie of calories) {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-            c.renderCalorie
+    
         }
 
     })
@@ -27,7 +27,7 @@ function fetchCalories() {
 function createForm() {
     let caloriesForm = document.getElementById("caloriesForm")
     
-    caloriesForm.insertAdjacentHTML("afterbegin",  
+    caloriesForm.innerHTML +=  
     `
     <form id="myForm">
         <label>Age:</label><br />
@@ -48,7 +48,7 @@ function createForm() {
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
         <input type="button" value="Reset" onclick="window.location.reload()">
     </form>
-    `)
+    `
     caloriesForm.addEventListener("submit", formSubmit)
 }
 
@@ -75,11 +75,14 @@ function formSubmit() {
             weight: weight,
             height: height,
             total_calories: total_calories,
+            goals_attributes: {
             activity_level: activity_level
+            }
         })
     })
     .then(response => response.json())
     .then(calorie => {
+        debugger
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
             c.renderCalorie
             

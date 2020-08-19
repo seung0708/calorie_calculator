@@ -10,14 +10,17 @@ class Calorie {
     }
 
     renderCalorie() {
-        let caloriesResults = document.querySelector("results")
-
+      console.log(this)
+        let caloriesResults = document.getElementById("results")
+        console.log(caloriesResults)
         caloriesResults.innerHTML += 
         `
-            <p id="total">${this.total_calories} calories</p>
+            <p>${this.total_calories} calories</p>
 
         `
     }
+
+
     static calculateCalories(age, gender, weight, height, activity_level) {
 
         if (gender === "male" && activity_level === "sedentary") {

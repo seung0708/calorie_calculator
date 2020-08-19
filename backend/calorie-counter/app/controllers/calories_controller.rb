@@ -15,7 +15,7 @@ class CaloriesController < ApplicationController
 
   # POST /calories
   def create
-    #binding.pry
+    binding.pry
     @goal = Goal.new(id: params[:id], activity_level: params[:activity_level])
     @calorie = Calorie.create(calory_params)
     @calorie.goals << @goal

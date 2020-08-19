@@ -29,11 +29,3 @@
     [] When you look back at your commits with git log, the messages should describe each change
 [] Don't include changes in a commit that aren't related to the commit message 
 []
-
-
-#user model
-    -username:string
-    -email:string
-    -name:string
-
-#caloriecalculator

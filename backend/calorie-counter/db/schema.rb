@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 2020_07_28_190549) do
   create_table "calories", force: :cascade do |t|
     t.integer "age"
     t.string "gender"
-    t.float "weight"
+    t.integer "weight"
     t.integer "height"
-    t.float "total_calories"
+    t.integer "total_calories"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
