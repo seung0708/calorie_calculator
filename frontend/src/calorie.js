@@ -20,25 +20,35 @@ class Calorie {
     }
     static calculateCalories(age, gender, weight, height, activity_level) {
 
-        if (gender === "male" && activity_level === "sedentary") 
+        if (gender === "male" && activity_level === "sedentary") {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.2)
-        else  if (gender === "male" && activity_level === "lightly active") 
+        }
+        else  if (gender === "male" && activity_level === "lightly active") {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.375)
-        else if (gender === "male" && activity_level === "moderately active") 
+        }
+        else if (gender === "male" && activity_level === "moderately active") {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.55)
-        else if (gender === "male" && activity_level === "active") 
+        }
+        else if (gender === "male" && activity_level === "active") {
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) * 1.9)
+        }
         else if (gender === "male" & activity_level === ""){
           return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))))
         }
-        else if (gender === "female" && activity_level === "sedentary")
+        else if (gender === "female" && activity_level === "sedentary") {
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.2)
-        else if (gender === "female" && activity_level === "lightly active")
+        }
+        else if (gender === "female" && activity_level === "lightly active") {
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.375)
-        else if (gender === "female" && activity_level === "moderately active")
+        }
+        else if (gender === "female" && activity_level === "moderately active") {
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.55)
-        else if (gender === "female" && activity_level === "activ")
+        }
+        else if (gender === "female" && activity_level === "active") {
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) * 1.9)
-
+        }
+        else if (gender === "male" & activity_level === ""){
+            return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))))
+            }
         }    
 }
