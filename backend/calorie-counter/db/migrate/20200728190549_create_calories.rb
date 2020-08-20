@@ -3,9 +3,9 @@ class CreateCalories < ActiveRecord::Migration[6.0]
     create_table :calories do |t|
       t.integer :age
       t.string  :gender
-      t.float   :weight
+      t.integer :weight
       t.integer :height
-      t.float   :total_calories
+      t.integer :total_calories
       
       t.timestamps
     end

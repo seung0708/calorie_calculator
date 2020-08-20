@@ -10,9 +10,8 @@ class Calorie {
     }
 
     renderCalorie() {
-      console.log(this)
         let caloriesResults = document.getElementById("results")
-        console.log(caloriesResults)
+
         caloriesResults.innerHTML += 
         `
             <p>${this.total_calories} calories</p>

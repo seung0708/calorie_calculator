@@ -32,10 +32,7 @@ div > p {
     bottom: 350px;
 }
 
-#myGoals {
-    text-align: center;
-    position: absolute;
-    bottom: 250px;
 
+#resources {
+    height: 500px;
 }
-

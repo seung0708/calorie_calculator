@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
-    //showCaloriesResultsOnLoad()
-    //disableSubmit()
-    //goalsForm()
-    //showGoalsResultsOnLoad()
+    addURLbutton()
    
 })
 
@@ -75,99 +72,58 @@ function formSubmit() {
             weight: weight,
             height: height,
             total_calories: total_calories,
-            goals_attributes: {
+            goals_attributes: [{
             activity_level: activity_level
-            }
+            }]
         })
     })
     .then(response => response.json())
     .then(calorie => {
-        debugger
-            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.activity_level)    
-            c.renderCalorie
+    
+            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.goals[0].activity_level)    
+            c.renderCalorie()
             
     })
     
 }
 
-/** 
-function showCaloriesResultsOnLoad() {
-   let showResults = document.getElementById("results")
+function addURLbutton() {
+    let urlBtn = document.getElementById("resources")
 
-   showResults.addEventListener("submit", function() {
-    if (showResults.style.display === "none") {
-        showResults.style.display = "block";
-    } else {
-        showResults.style.display = "none"
-    } 
-   })
-}
-
-function disableSubmit() {
-    let submitBtn = document.getElementById("totalCalories");
-    submitBtn.onsubmit = submit;
-    function submit(event) {
-        form.setAttribute('hidden', '');
-        event.preventDefault();
-        }
-
-}
-**/
-
-
-function goalsForm() {
-    let goalsForm = document.getElementById("container")
-
-    goalsForm.insertAdjacentHTML("beforeend",
-    `
-    <form id="myGoals">
-        <select id="plan"><br>
-            <option value="">Choose Your Activity level</option>
-            <option value="weightLoss">Fat Loss</option>
-            <option value="maintenance">Maintenance</option>
-            <option value="gain">Gain weight</option>
-        </select><br />
-        <input type="submit" value="Update Calories" id="goalCalories" ><br />
-        <input type="button" value="Reset" onclick="window.location.reload()">
-    </form>
-    `)
-    goalsForm.addEventListener("submit", formUpdate)   
-
-}
-
-//PUT Request
-function formUpdate() {
-    event.preventDefault();
-
-    let goal = document.getElementById("plan")
-    let plan = goal.options[goal.selectedIndex].value
-    let total_calories = Goal.calculateGoals(plan)
+    urlBtn.insertAdjacentHTML("beforeend", 
+        `
+        <form>
+            <input type="text" id="url">
+            <input type="submit" value="Add URL">
+        </form>
+        `
+    );
     
-    fetch(`${BASE_URL}goals/${id}`, {
-        method: "PUT",
+    urlBtn.addEventListener("submit", addURL)
+}
+
+function addURL() {
+    event.preventDefault();
+    
+    let url = document.getElementById("url").value
+
+    fetch(`${BASE_URL}resources`, {
+        method: "POST",
         headers: {
             'content-type': 'application/json'
         },
         body: JSON.stringify({
-            id: id,
-            plan: plan,
-            total_calories: total_calories
+            url: url
         })
     })
     .then(response => response.json())
-    .then(goal => {
-            let g = Goal.update(goal.id, goal.plan, goal.total_calories)    
-            g.renderCalorie()
-
+    .then(resource => {
+    
+            let r = new Resource(resource.url)    
+            r.renderResource()
+            
     })
     
 }
 
-function showGoalsResultsOnLoad() {
-    let goalResults = document.getElementById("goals");
-    if (goalResults.style.display === "none") {
-        goalResults.style.display = "block";
-    } else {
-        goalResults.style.display = "none"
-    }
-}
+

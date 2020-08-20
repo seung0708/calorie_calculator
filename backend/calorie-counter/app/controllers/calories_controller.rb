@@ -15,12 +15,10 @@ class CaloriesController < ApplicationController
 
   # POST /calories
   def create
-    binding.pry
-    @goal = Goal.new(id: params[:id], activity_level: params[:activity_level])
     @calorie = Calorie.create(calory_params)
-    @calorie.goals << @goal
 
-  render json: @calorie, status: 200
+
+  render json: @calorie, include: [:goals], status: 200
   end
 
   # PATCH/PUT /calories/1
