@@ -4,17 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
     addURLbutton()
-   
+    resetBtn()
 })
 
-// GET request
+// Calories GET request
 const fetchCalories = () => {
     fetch(`${BASE_URL}calories`)
     .then(response => response.json())
     .then(calories => {
         for (const calorie of calories) {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-            c.renderCalorie
+            
         }
 
     })
@@ -43,14 +43,14 @@ const createForm = () => {
             <option value="active">Active</option>
         </select><br />
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
-        <input type="button" value="Reset" onclick="window.location.reload()">
+        <input type="button" value="Reset" id="reset">
     </form>
     `
     caloriesForm.addEventListener("submit", formSubmit)
 }
 
-// POST request
-const formSubmit = (event) => {
+// Calories POST request
+const formSubmit = event => {
     event.preventDefault();
 
     let age = document.getElementById("age").value
@@ -87,7 +87,7 @@ const formSubmit = (event) => {
     
 }
 
-function addURLbutton() {
+const addURLbutton = () => {
     let urlBtn = document.getElementById("resources")
 
     urlBtn.insertAdjacentHTML("beforeend", 
@@ -102,7 +102,7 @@ function addURLbutton() {
     urlBtn.addEventListener("submit", addURL)
 }
 
-function addURL() {
+const addURL = () => {
     event.preventDefault();
     
     let url = document.getElementById("url").value
@@ -126,4 +126,13 @@ function addURL() {
     
 }
 
-
+const resetBtn = () => {
+    document.getElementById('reset').onclick = function() {
+        document.getElementById("age").value = "";
+        document.getElementById("gender").value = "";
+        document.getElementById("weight").value = "";
+        document.getElementById("height").value = "";
+        document.getElementById("activity_level").value = "";
+        document.getElementById("results").value = "0";
+    }
+}

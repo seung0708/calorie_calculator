@@ -14,7 +14,7 @@ class Calorie {
 
         caloriesResults.innerHTML += 
         `
-            <p>${this.total_calories} calories</p>
+            <p id="results">${this.total_calories} calories</p>
 
         `
     }

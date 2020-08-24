@@ -10,7 +10,7 @@ class Resource {
         ` 
             
             <ul>
-                <li><link>${this.url}<link></li>
+                <li>${this.url}</li>
             </ul>
 
         `
