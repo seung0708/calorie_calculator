@@ -19,7 +19,6 @@ class Calorie {
         `
     }
 
-
     static calculateCalories(age, gender, weight, height, activity_level) {
 
         if (gender === "male" && activity_level === "sedentary") {
@@ -52,5 +51,5 @@ class Calorie {
         else if (gender === "male" & activity_level === "0"){
             return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))))
             }
-        }    
+        }
 }

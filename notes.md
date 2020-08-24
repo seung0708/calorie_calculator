@@ -6,7 +6,7 @@
 [x] The JavaScript application must use Object Oriented JavaScript (classes) to encapsulate related data and behavior
 [x] The domain model served by tht Rails backend must include a resource with at least one has-many relationship
 [x] The backend and frontend must collaborate to demonstrate Client-Server Communication.
-[] Your application should have at least 3 AJAX calls,
+[x] Your application should have at least 3 AJAX calls,
         [x] covering at least 2 of CRUD 
         [x] Your client-side JavaScript code must use fetch with the appropriate HTTP verb
         [x] and your Rails API should use RESTful convention

@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:3000/"
+
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
@@ -5,23 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
    
 })
 
-const BASE_URL = "http://localhost:3000/"
-
 // GET request
-function fetchCalories() {
+const fetchCalories = () => {
     fetch(`${BASE_URL}calories`)
     .then(response => response.json())
     .then(calories => {
         for (const calorie of calories) {
             let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-    
+            c.renderCalorie
         }
 
     })
 };
 
 // Calories Form 
-function createForm() {
+const createForm = () => {
     let caloriesForm = document.getElementById("caloriesForm")
     
     caloriesForm.innerHTML +=  
@@ -50,7 +50,7 @@ function createForm() {
 }
 
 // POST request
-function formSubmit() {
+const formSubmit = (event) => {
     event.preventDefault();
 
     let age = document.getElementById("age").value
