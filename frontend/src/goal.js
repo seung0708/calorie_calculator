@@ -16,16 +16,5 @@ class Goal {
         `
     }
 
-    static calculateGoals(plan) {
-        if (plan === 'weightLoss') {
-            return Math.round(total_calories - 500)
-        }
-        else if (plan === 'maintenance' ) {
-            return Math.round(total_calories)
-        }
-
-        else if (plan === 'gain') {
-            return Math.round(total_calories + 500)
-        }
-    }
+   
 }
