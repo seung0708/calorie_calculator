@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchCalories()
     addURLbutton()
     resetBtn()
+
 })
 
 // Calories GET request
@@ -47,8 +48,12 @@ const createForm = () => {
     </form>
     `
     caloriesForm.addEventListener("submit", formSubmit)
-}
 
+    document.getElementById("myForm").onsubmit = function () {
+        document.getElementById("totalCalories").setAttribute("disabled", true)
+    }
+
+}
 // Calories POST request
 const formSubmit = event => {
     event.preventDefault();
@@ -132,7 +137,9 @@ const resetBtn = () => {
         document.getElementById("gender").value = "";
         document.getElementById("weight").value = "";
         document.getElementById("height").value = "";
-        document.getElementById("activity_level").value = "";
-        document.getElementById("results").value = "0";
+        document.getElementById("activity_level").value = "0";
+        document.getElementById("totalCalories").removeAttribute('disabled')
+        document.getElementById("totalResults").remove();
     }
+
 }
