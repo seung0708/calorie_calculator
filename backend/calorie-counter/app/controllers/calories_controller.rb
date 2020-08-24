@@ -5,12 +5,16 @@ class CaloriesController < ApplicationController
   def index
     @calories = Calorie.all
 
-    render json: @calories, include: [:goals], exclude: [:created_at, :updated_at], status: 200
+    render json: @calories.to_json(:include => {
+      :goals => {:only => [:id, :activity_level, :calorie_id]}
+    },:except => [:created_at, :updated_at])
   end
 
   # GET /calories/1
   def show
-    render json: @calorie, include: [:goals], status: 200
+    render json: @calorie.to_json(:include => {
+      :goals => {:only => [:id, :activity_level, :calorie_id]}
+    },:except => [:created_at, :updated_at]), status: 200
   end
 
   # POST /calories
