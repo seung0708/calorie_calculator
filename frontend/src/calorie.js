@@ -1,6 +1,6 @@
 class Calorie {
-    constructor(age, gender, weight, height, total_calories, activity_level) {
-  
+    constructor(id,age, gender, weight, height, total_calories, activity_level) {
+        this.id = id;
         this.age = age;
         this.gender = gender;
         this.weight = weight;
@@ -17,6 +17,24 @@ class Calorie {
             <p id="totalResults">${this.total_calories} calories</p>
 
         `
+    }
+
+    viewCalorie() {
+        const viewCalories = document.getElementById("calorieValues")
+      
+        viewCalories.innerHTML +=
+        `
+        <p style="text-align:center;"><strong>Previously calculated Calories</strong></p>
+         <ul id="allValues" class="list">
+            <li>Age:    ${this.age}</li>
+            <li>Gender:   ${this.gender}</li>
+            <li>Weight(lbs):  ${this.weight}</li>
+            <li>Height(inches)  ${this.height}</li>
+            <li>Calories:   ${this.total_calories}</li>
+            <li>Activity Level:   ${this.activity_level}</li>
+         </ul>  
+        `
+
     }
 
     static calculateCalories(age, gender, weight, height, activity_level) {

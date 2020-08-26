@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:3000/"
-
+const newArray = [];
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
     fetchCalories()
@@ -10,15 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Calories GET request
 const fetchCalories = () => {
-    fetch(`${BASE_URL}calories`)
+    
+    fetch(`${BASE_URL}calories/`)
     .then(response => response.json())
     .then(calories => {
-        for (const calorie of calories) {
-            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories)
-            
-        }
-
+         calories.map((calorie, i, array) => {
+             if (array.length -1 === i) {
+                let c = new Calorie(calorie.id, calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.goals[0].activity_level)
+                c.viewCalorie()
+                console.log(c)
+            } 
+        })
     })
+           
 };
 
 // Calories Form 
@@ -42,7 +46,7 @@ const createForm = () => {
             <option value="lightly active">Lightly Active</option>
             <option value="moderately active"">Moderately Active</option>
             <option value="active">Active</option>
-        </select><br />
+    </select><br />
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
         <input type="button" value="Reset" id="reset">
     </form>
@@ -77,16 +81,18 @@ const formSubmit = event => {
             weight: weight,
             height: height,
             total_calories: total_calories,
-            goals_attributes: [{
             activity_level: activity_level
-            }]
+            /**goals_attributes: [{
+            activity_level: activity_level
+            }] **/
         })
     })
     .then(response => response.json())
     .then(calorie => {
     
-            let c = new Calorie(calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.goals[0].activity_level)    
+            let c = new Calorie(calorie.id, calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.total_calories, calorie.goals[0].activity_level)  
             c.renderCalorie()
+            console.log(c)
             
     })
     
@@ -97,8 +103,8 @@ const addURLbutton = () => {
 
     urlBtn.insertAdjacentHTML("beforeend", 
         `
-        <form>
-            <input type="text" id="url">
+        <form id="urlForm">
+            <input type="textarea" id="url">
             <input type="submit" value="Add URL">
         </form>
         `
@@ -133,6 +139,7 @@ const addURL = () => {
 
 const resetBtn = () => {
     document.getElementById('reset').onclick = function() {
+
         document.getElementById("age").value = "";
         document.getElementById("gender").value = "";
         document.getElementById("weight").value = "";
@@ -143,3 +150,4 @@ const resetBtn = () => {
     }
 
 }
+

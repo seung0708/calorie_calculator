@@ -19,10 +19,15 @@ class CaloriesController < ApplicationController
 
   # POST /calories
   def create
-    @calorie = Calorie.create(calory_params)
-
-
-  render json: @calorie, include: [:goals], status: 200
+    #binding.pry
+    @calorie = Calorie.new(calory_params)
+    @goals = Goal.create(activity_level: params[:activity_level])
+    @calorie.goals << @goals
+      if @calorie.save
+        render json: @calorie, include: [:goals], status: 200
+      else 
+        render json: ("Calorie not saved").to_json
+      end 
   end
 
   # PATCH/PUT /calories/1
@@ -54,7 +59,6 @@ class CaloriesController < ApplicationController
           :height, 
           :total_calories,
           goals_attributes: [
-            :id,
             :activity_level
           ])
     end

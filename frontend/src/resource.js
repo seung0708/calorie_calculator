@@ -7,12 +7,12 @@ class Resource {
         let resourceURL = document.getElementById("resources");
 
         resourceURL.innerHTML +=
-        ` 
-            
-            <ul>
+        `             
+            <ul style="list-style: none;">
                 <li>${this.url}</li>
             </ul>
 
         `
+
     }
 }
