@@ -3,6 +3,8 @@ body {
 }
 
 .parent {
+    position: absolute;
+    left: 440px;
     height: 525px;
     width: 360px;
     margin: 100px auto;
@@ -27,8 +29,10 @@ h1 {
 
 
 .view {
+    list-style-type: none;
     position: absolute;
-    top: 50px; left: 100px;
+    top: 50px; 
+    left: 100px;
     height: 220px;
     width: 240px;
     margin: 100px auto; 
@@ -41,4 +45,22 @@ h1 {
 ul.list {
     list-style-type: none;
 
+}
+
+#resources {
+    position: absolute;
+    top: 100px;
+    right: 50px;
+}
+
+#totalResults {
+    position: absolute;
+    top: 300px;
+    text-align: center;
+}
+
+#delete {
+    position: absolute;
+    top: 175px;
+    left: 90px;
 }

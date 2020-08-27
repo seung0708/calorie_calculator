@@ -12,18 +12,18 @@ class GoalsController < ApplicationController
   end
 
   def create
-    @goal = Goal.new(goal_params)
-
+    #binding.pry
+    @user = User.find_by(id: params[:id])
+    @goal = @user.goals.build(goal_params)
+    
     if @goal.save
-      render json: @goal, status: :created, location: @goal
-    else
-      render json: @goal.errors, status: :unprocessable_entity
-    end
+      render json: @goal, status: 200 
+    end 
   end
 
   def update
     if @goal.update(goal_params)
-      binding.pry
+      #binding.pry
       render json: @goal
     else
       render json: @goal.errors, status: :unprocessable_entity
@@ -43,10 +43,9 @@ class GoalsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def goal_params
       params.require(:goal).permit(
-        :plan,
-        :activity_level, 
-         calorie_attributes: [
-          total
-      ])
+        :id,
+        :goal_level,
+        :total_calories
+        )
     end
 end

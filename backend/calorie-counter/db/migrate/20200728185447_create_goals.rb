@@ -1,9 +1,9 @@
 class CreateGoals < ActiveRecord::Migration[6.0]
   def change
     create_table :goals do |t|
-      t.string  :activity_level
-      t.string  :plan
-      t.belongs_to :calorie
+      t.string  :goal_level
+      t.string  :total_calories
+      t.belongs_to :user
 
       t.timestamps
     end

@@ -1,4 +1,5 @@
 class Goal < ApplicationRecord
-    belongs_to :calorie
-    accepts_nested_attributes_for :calorie
+    belongs_to :user, optional: true
+    accepts_nested_attributes_for :user
+    
 end

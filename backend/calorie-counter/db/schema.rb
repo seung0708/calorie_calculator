@@ -12,27 +12,26 @@
 
 ActiveRecord::Schema.define(version: 2020_08_20_021616) do
 
-  create_table "calories", force: :cascade do |t|
-    t.integer "age"
-    t.string "gender"
-    t.integer "weight"
-    t.integer "height"
-    t.integer "total_calories"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "goals", force: :cascade do |t|
-    t.string "activity_level"
-    t.string "plan"
-    t.integer "calorie_id"
+    t.string "goal_level"
+    t.string "total_calories"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["calorie_id"], name: "index_goals_on_calorie_id"
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "resources", force: :cascade do |t|
     t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.integer "age"
+    t.string "gender"
+    t.integer "weight"
+    t.integer "height"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -34,3 +34,12 @@
 table 
     button that displays the table of calories by gender
     some kind of classification
+
+
+-maybe have total_calories in the Goal object.
+-instead of activity_level, actually have a goal attribute (e.g. "exercise 1-2 times a week")
+-calculate :total_calories in Goals. 
+-display the current users goals and not someone else's 
+
+take the users info and calculate their BMI
+from there I create a new form where I take their weight loss goal and 
