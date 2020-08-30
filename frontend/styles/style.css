@@ -59,8 +59,17 @@ ul.list {
     text-align: center;
 }
 
-#delete {
+#goalsForm {
     position: absolute;
-    top: 175px;
-    left: 90px;
+    top: 365px;
+    list-style-type: none;
+}
+
+#results {
+    position: absolute;
+    top: 420px;
+}
+
+ul.goal-list {
+    list-style-type: none;
 }

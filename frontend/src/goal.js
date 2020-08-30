@@ -1,34 +1,57 @@
 class Goal {
-    constructor(age, gender, weight, height, goal_level, total_calories) {
-        this.age = age;
-        this.gender = gender;
-        this.weight = weight;
-        this.height = height;
+    constructor(id, goal_level, total_calories  ) {
+        this.id = id
         this.goal_level = goal_level,
         this.total_calories = total_calories
     }
 
-    static caloriesGoal(age, gender, weight, height, goal_level) {
-       
-        if (gender === "male" && goal_level === "fat loss") {
-          return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) - 500)
+    viewGoals() {
+        const goalsView = document.getElementById("results")
+
+        goalsView.innerHTML += 
+
+        `
+        <ul class="goal-list" data-set-id="${this.id}">
+            <li id="total-calories" data-set-goals="${this.total_calories}"> ${this.total_calories} calories </li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        `
+    }
+
+
+   static caloriesGoal(goal_level, bmi) {
+        if (goal_level === "fat loss") {
+            return (parseInt(bmi) - 500)
         }
-        else if (gender === "male" && goal_level === "maintenance") {
-          return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) )
+        else if (goal_level === "maintenance") {
+            return parseInt(bmi)
         }
-        else if (gender === "male" && goal_level === "gain weight") {
-          return Math.round((66.47 + (6.3 * weight) + (12.9 * height - (6.8 * age))) + 500)
+        else if (goal_level === "gain weight") {
+            return (parseInt(bmi) + 500)
         }
-        else if (gender === "female" && goal_level === "fat loss") {
-            return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) -500)
-        }
-        else if (gender === "female" && goal_level === "maintenance") {
-            return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))))
-        }
-        else if (gender === "female" && goal_level === "gain weight") {
-            return Math.round((665 + (4.3 * weight) + (4.7 * height - (4.7 * age))) + 500)
-        }
-    
-        }
+    } 
+
+  static updateCalories(goal_level, total_calories) {
+      if (goal_level === "maintenance" && total_calories === 1102) {
+        return total_calories + 500
+      }
+      else if (goal_level === "gain weight" && total_calories === 1102) {
+          return total_calories + 1000
+      }
+      else if (goal_level === "fat loss" && total_calories === 1602) {
+          return total_calories - 500
+      }
+      else if (goal_level === "gain weight" && total_calories === 1602) {
+          return total_calories + 500
+      }
+      else if (goal_level === "fat loss" && total_calories === 2102) {
+          return total_calories - 1000
+      }
+      else if (goal_level === "maintence" && total_calories === 2102) {
+          return total_calories - 500
+      }
+  }
 
 }

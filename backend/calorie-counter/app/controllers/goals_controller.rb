@@ -13,12 +13,10 @@ class GoalsController < ApplicationController
 
   def create
     #binding.pry
-    @user = User.find_by(id: params[:id])
-    @goal = @user.goals.build(goal_params)
-    
-    if @goal.save
-      render json: @goal, status: 200 
-    end 
+    @calorie = Calorie.last
+    @goal = @calorie.goals.build(goal_params)
+   
+    render json: @goal.save ? @goal : {message: @goal.errors.messages[:error][0]}
   end
 
   def update

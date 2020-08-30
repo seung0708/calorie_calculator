@@ -2,73 +2,55 @@ const BASE_URL = "http://localhost:3000/"
 
 document.addEventListener("DOMContentLoaded", () => {
     createForm()
-    //fetchBMI()
-    addURLbutton()
-    deleteButton()
-})
+    goalsForm()
+    resetBtn()
 
-// Calories GET request
-/**
-const fetchBMI = () => {
-   
-    fetch(`${BASE_URL}users`)
-    .then(response => response.json())
-    .then(users => {
-            for (user of users.splice(-1)) {
-                let u = new User(user.id, user.age, user.gender, user.weight, user.height, user.goals[0].goal_level, user.goals[0].total_calories)
-                console.log(u)
-                u.displayInfo(  
-                    document.getElementById("myForm").onsubmit = function() {
-                        document.getElementById("totalResults").removeAttribute("hidden")
-        
-                })
-                
-                
-            }
-                
-         })
-}; **/
+})
 
 // Calories Form 
 const createForm = () => {
-    let caloriesForm = document.getElementById("caloriesForm")
-    
+    const caloriesForm = document.createElement("div")
+    const parent = document.getElementById("container")
+    parent.appendChild(caloriesForm)
+
     caloriesForm.innerHTML +=  
     `
     <form id="myForm">
         <label>Age:</label><br />
         <input type="number" id="age"><br />
-        <label>Gender</label><br />
-        <input type="text" id="gender"><br />
-        <label>Weight</label><br />
-        <input type="number" id="weight" placeholder="in Pounds"><br />
+        <br>
+        <label>Gender:</label><br />
+        <input type="radio" name="genderS" id="gender" value="Male">Male</input>
+        <input type="radio" name="genderS" id="gender" value="Female">Female</input>
+        <br /><br>
+        <label>Weight:</label><br />
+        <input type="number" id="weight" placeholder="in Pounds">
+        <br /><br>
         <label>Height</label><br />
-        <input type="number" id="height" placeholder="in Inches"><br />
-        <select id="goal_level"><br>
-            <option value="0">Choose your Goal</option>
-            <option value="fat loss">Fat Loss</option>
-            <option value="maintenance">Maintenance</option>
-            <option value="gain weight"">Weight gain</option>
-           
-        </select><br />
+        <input type="number" id="height" placeholder="in Inches">
+        <br /><br>
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
+        <input type="button" value="Reset" id="reset">
     </form>
     `
     caloriesForm.addEventListener("submit", formSubmit)
 
+    document.getElementById("myForm").onsubmit = function () {
+        document.getElementById("totalCalories").setAttribute("disabled", true)
+    } 
+
 }
-// Calories POST request
 const formSubmit = event => {
     event.preventDefault();
 
+   
     let age = document.getElementById("age").value
-    let gender = document.getElementById("gender").value
+    let gender = document.querySelector('input[name="genderS"]:checked').value;
     let weight = document.getElementById("weight").value
     let height = document.getElementById("height").value
-    let goal = document.getElementById("goal_level")
-    let goal_level = goal.options[goal.selectedIndex].value
-    let total_calories = Goal.caloriesGoal(age, gender, weight, height, goal_level)
-    fetch(`${BASE_URL}users`, {
+    let bmi = Calorie.calculateCalories(age, gender, weight, height)
+    //debugger
+    fetch(`${BASE_URL}calories`, {
         method: "POST",
         headers: {
             'content-type': 'application/json'
@@ -78,61 +60,149 @@ const formSubmit = event => {
             gender: gender,
             weight: weight,
             height: height,
-            goals_attributes: [{
-              goal_level: goal_level,
-              total_calories: total_calories
-            }]
+            bmi: bmi,
+
         })
     })
     .then(response => response.json())
-    .then(user => {
-            
-            let u = new User(user.id, user.age, user.gender, user.weight, user.height, user.goals[0].goal_level, user.goals[0].total_calories) 
-                u.viewResults()
-        
+    .then(calorie => {
+            if (calorie.message) {
+                alert(calorie.message)
+            } 
+            else { 
+                let u = new Calorie(calorie.id, calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.bmi) 
+                console.log(u)
+                u.viewCalories()
+            }
     })
+
+
+
+}
+
+const goalsForm = () => {
+    const goalsForm = document.createElement("form")
+    goalsForm.setAttribute("id", "goalsForm")
+    const div = document.getElementById("container")
+    div.appendChild(goalsForm)
+    
+
+    goalsForm.innerHTML += 
+    `
+    <select id="goal_level"><br>
+        <option value="0">Choose your Goal</option>
+        <option value="fat loss">Fat Loss</option>
+        <option value="maintenance">Maintenance</option>
+        <option value="gain weight"">Weight gain</option>
+       
+    </select><br />
+    <input type="submit" value="Calculate Calorie Goals" id="goalCalories"><br />
+    <input type="button" value="Update Goals" id="update" hidden>
+    `
+    goalsForm.addEventListener("submit", goalSubmit)
+    
+    document.getElementById("goalsForm").onsubmit = function() {
+            const updateButton = document.getElementById("update")
+            updateButton.hidden = false
+            
+            updateButton.addEventListener("click", updateGoals)
+    }
+
     
 }
 
-
-
-const addURLbutton = () => {
-    let urlBtn = document.getElementById("resources")
-
-    urlBtn.insertAdjacentHTML("beforeend", 
-        `
-        <form id="urlForm">
-            <input type="textarea" id="url">
-            <input type="submit" value="Add URL">
-        </form>
-        `
-    );
+const goalSubmit = (e) => {
+    e.preventDefault()
     
-    urlBtn.addEventListener("submit", addURL)
-}
-
-const addURL = () => {
-    event.preventDefault();
-    
-    let url = document.getElementById("url").value
-
-    fetch(`${BASE_URL}resources`, {
+    let id = document.getElementById("user").getAttribute("data-set-id")
+    let bmi = document.getElementById("bmi").getAttribute("data-set-bmi")
+       
+    let goal = document.getElementById("goal_level")
+    let goal_level = goal.options[goal.selectedIndex].value
+    let total_calories = Goal.caloriesGoal(goal_level, bmi)
+    //debugger
+    fetch(`${BASE_URL}goals`, {
         method: "POST",
         headers: {
             'content-type': 'application/json'
         },
         body: JSON.stringify({
-            url: url
+          id,
+          goal_level,
+          total_calories
+            
         })
     })
     .then(response => response.json())
-    .then(resource => {
+    .then(goal => {
+            if (goal.message) {
+                alert(goal.message)
+            }
+            else {
+                let g = new Goal(goal.id, goal.goal_level, goal.total_calories)
+                g.viewGoals()
+                //console.log(g)
+            }
+            
+    })
+
+}
+
+
+const updateGoals = () => {
+    event.preventDefault();
     
-            let r = new Resource(resource.url)    
-            r.renderResource()
+    const id = parseInt(document.getElementsByClassName("goal-list")[0].getAttribute("data-set-id"))
+    const goal = document.getElementById("goal_level")
+    const goal_level = goal.options[goal.selectedIndex].value
+    const total_calories = parseInt(document.getElementById("total-calories").getAttribute("data-set-goals"))
+    const total = Goal.updateCalories(goal_level, total_calories)
+    
+    
+    fetch(`${BASE_URL}goals/${id}`, {
+        method: "PATCH",
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            id,
+            goal_level,
+            total_calories: total
+        })
+    })
+    .then(response => response.json())
+    .then(goal => {
+        if (goal.message) {
+            alert(goal.message)
+        }
+        else {
+            let g = new Goal(goal.id, goal.goal_level, goal.total_calories)          
+            g.viewGoals()
+                
+        }
     })
     
 }
+
+const deleteCalories = () => {
+    event.preventDefault();
+    
+    let id = parseInt(document.getElementById("user").getAttribute("data-set-id"))
+    
+    fetch(`${BASE_URL}calories/${id}`, {
+        method: "DELETE",
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            id
+        })
+    })
+    .then(response => response.json())
+    .then(calorie.remove())
+
+}
+
 
 const resetBtn = () => {
     document.getElementById('reset').onclick = function() {
@@ -141,30 +211,8 @@ const resetBtn = () => {
         document.getElementById("gender").value = "";
         document.getElementById("weight").value = "";
         document.getElementById("height").value = "";
-        document.getElementById("totalResults").remove();
+        document.getElementById("totalCalories").removeAttribute('disabled')
     }
 
 }
 
-const deleteButton = () => {
-    const deleteButton = document.createElement("button")
-    deleteButton.setAttribute("id", "delete")
-    deleteButton.innerHTML = "Delete"
-    const results = document.getElementById("calorieValues")
-    results.appendChild(deleteButton)
-
-    deleteButton.addEventListener("click", deleteResults)
-}
-
-const deleteResults = (e) => {
-    e.preventDefault()
-
-    fetch(`${BASE_URL}users/${id}`, {
-        method: 'DELETE', headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            url: url
-        })
-    })
-    }

@@ -10,30 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_20_021616) do
+ActiveRecord::Schema.define(version: 2020_07_28_190549) do
 
-  create_table "goals", force: :cascade do |t|
-    t.string "goal_level"
-    t.string "total_calories"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_goals_on_user_id"
-  end
-
-  create_table "resources", force: :cascade do |t|
-    t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "users", force: :cascade do |t|
+  create_table "calories", force: :cascade do |t|
     t.integer "age"
     t.string "gender"
     t.integer "weight"
     t.integer "height"
+    t.integer "bmi"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "goal_level"
+    t.integer "total_calories"
+    t.integer "calorie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["calorie_id"], name: "index_goals_on_calorie_id"
   end
 
 end
