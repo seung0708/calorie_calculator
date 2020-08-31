@@ -14,7 +14,7 @@ class Calorie {
         viewCalories.innerHTML +=
         `
         
-         <ul id="user" class="list" data-set-id="${this.id}">
+         <ul id="calories" class="list" data-set-id="${this.id}">
             
             <li>Age: ${this.age}</li>
             <li>Gender: ${this.gender}</li>
@@ -25,6 +25,11 @@ class Calorie {
          </ul>  
         `
         deleteButton.addEventListener("click", deleteCalories)
+
+        document.getElementById("deleteButton").onclick = function() {
+          document.getElementById("calories").remove()
+          document.getElementById("totalCalories").removeAttribute('disabled')
+      }
     }
 
     static calculateCalories(age, gender, weight, height) {

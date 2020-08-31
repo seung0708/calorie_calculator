@@ -15,7 +15,7 @@ const createForm = () => {
 
     caloriesForm.innerHTML +=  
     `
-    <form id="myForm" name="myForm" onsubmit="return validateForm()">
+    <form id="myForm" name="myForm" >
         <label>Age:</label><br />
         <input type="number" id="age" name="age"><br />
         <br>
@@ -35,9 +35,9 @@ const createForm = () => {
     `
     caloriesForm.addEventListener("submit", formSubmit)
 
-    /**document.getElementById("myForm").onsubmit = function () {
+    document.getElementById("myForm").onsubmit = function () {
         document.getElementById("totalCalories").setAttribute("disabled", true)
-    } **/
+    }
 
 }
 
@@ -46,10 +46,10 @@ const formSubmit = event => {
     event.preventDefault();
 
    
-    let age = document.getElementById("age").value
+    let age = parseInt(document.getElementById("age").value)
     let gender = document.querySelector('input[name="genderS"]:checked').value;
-    let weight = document.getElementById("weight").value
-    let height = document.getElementById("height").value
+    let weight = parseInt(document.getElementById("weight").value)
+    let height = parseInt(document.getElementById("height").value)
     let bmi = Calorie.calculateCalories(age, gender, weight, height)
     debugger
     fetch(`${BASE_URL}calories`, {
@@ -118,7 +118,7 @@ const goalsForm = () => {
 const goalSubmit = (e) => {
     e.preventDefault()
     
-    let id = document.getElementById("user").getAttribute("data-set-id")
+    let id = document.getElementById("calories").getAttribute("data-set-id")
     let bmi = document.getElementById("bmi").getAttribute("data-set-bmi")
        
     let goal = document.getElementById("goal_level")
@@ -193,7 +193,7 @@ const updateGoals = () => {
 const deleteCalories = () => {
     event.preventDefault();
     
-    let id = parseInt(document.getElementById("user").getAttribute("data-set-id"))
+    let id = parseInt(document.getElementById("calories").getAttribute("data-set-id"))
     
     fetch(`${BASE_URL}calories/${id}`, {
         method: "DELETE",
@@ -204,9 +204,7 @@ const deleteCalories = () => {
             id
         })
     })
-    .then(response => response.json())
-    .then(json.remove())
-
+    
 }
 
 
@@ -222,30 +220,3 @@ const resetBtn = () => {
 
 }
 
-
-const validateForm = () => {
-    debugger
-    var ageValid = document.forms["myForm"]["age"].value;
-    if (ageValid == "") {
-        alert("Not a valid Age")
-        return false;
-    }
-
-    var genderValid = document.forms["myForm"]['input[name="genderS"]:checked'].value;
-    if (genderValid == "" || genderValid == null) {
-        alert("Not a valid Gender")
-        return false;
-    }    
-
-    var weightValid = document.forms["myForm"]["weight"].value;
-    if (weightValid == "") {
-        alert("Not a valid Weight")
-        return false;
-    }
-
-    var heightValid = document.forms["myForm"]["height"].value;
-    if (heightValid== "") {
-        alert("Not a valid Age")
-        return false;
-    }
-}
