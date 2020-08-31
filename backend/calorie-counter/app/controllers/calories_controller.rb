@@ -23,7 +23,7 @@ class CaloriesController < ApplicationController
                            bmi: params[:bmi]
     )
    
-    render json: @calorie.save ? @calorie : {message: @calorie.errors.messages[:error][0]}
+    render json: @calorie.save! ? @calorie : {message: @calorie.errors.messages[:error][0]}
   end
 
   # PATCH/PUT /calories/1

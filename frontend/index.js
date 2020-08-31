@@ -17,17 +17,17 @@ const createForm = () => {
     `
     <form id="myForm" name="myForm" >
         <label>Age:</label><br />
-        <input type="number" id="age" name="age"><br />
+        <input type="number" id="age" min="18" max="90" required><br />
         <br>
         <label>Gender:</label><br />
-        <input type="radio" name="genderS" id="gender" value="Male">Male</input>
-        <input type="radio" name="genderS" id="gender" value="Female">Female</input>
+        <input type="radio" name="genderS" id="gender" value="Male" required>Male</input>
+        <input type="radio" name="genderS" id="gender" value="Female" required>Female</input>
         <br /><br>
         <label>Weight:</label><br />
-        <input type="number" id="weight" name="weight" placeholder="in Pounds">
+        <input type="number" id="weight" placeholder="in Lbs" min="90" max="400" required>
         <br /><br>
         <label>Height</label><br />
-        <input type="number" id="height" name="weight" placeholder="in Inches">
+        <input type="number" id="height" placeholder="in inches" min="48" max="84" required>
         <br /><br>
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
         <input type="button" value="Reset" id="reset">
@@ -36,7 +36,8 @@ const createForm = () => {
     caloriesForm.addEventListener("submit", formSubmit)
 
     document.getElementById("myForm").onsubmit = function () {
-        document.getElementById("totalCalories").setAttribute("disabled", true)
+        document.getElementById("totalCalories").setAttribute("disabled", true);
+        document.getElementById("goalsForm").hidden = false;
     }
 
 }
@@ -86,6 +87,7 @@ const formSubmit = event => {
 const goalsForm = () => {
     const goalsForm = document.createElement("form")
     goalsForm.setAttribute("id", "goalsForm")
+    goalsForm.hidden = true;
     const div = document.getElementById("container")
     div.appendChild(goalsForm)
     
@@ -99,8 +101,8 @@ const goalsForm = () => {
         <option value="gain weight"">Weight gain</option>
        
     </select><br />
-    <input type="submit" value="Calculate Calorie Goals" id="goalCalories"><br />
-    <input type="button" value="Update Goals" id="update" hidden>
+    <input type="submit" value="Calculate Calorie Goals" id="goalCalories" ><br />
+    <input type="button" value="Update Goals" id="update">
     `
     goalsForm.addEventListener("submit", goalSubmit)
     
@@ -118,13 +120,13 @@ const goalsForm = () => {
 const goalSubmit = (e) => {
     e.preventDefault()
     
-    let id = document.getElementById("calories").getAttribute("data-set-id")
-    let bmi = document.getElementById("bmi").getAttribute("data-set-bmi")
+    let id = parseInt(document.getElementById("calories").getAttribute("data-set-id"))
+    let bmi = parseInt(document.getElementById("bmi").getAttribute("data-set-bmi"))
        
     let goal = document.getElementById("goal_level")
     let goal_level = goal.options[goal.selectedIndex].value
     let total_calories = Goal.caloriesGoal(goal_level, bmi)
-    //debugger
+    debugger
     fetch(`${BASE_URL}goals`, {
         method: "POST",
         headers: {
@@ -145,7 +147,7 @@ const goalSubmit = (e) => {
             else {
                 let g = new Goal(goal.id, goal.goal_level, goal.total_calories)
                 g.viewGoals()
-                //console.log(g)
+                console.log(g)
             }
             
     })

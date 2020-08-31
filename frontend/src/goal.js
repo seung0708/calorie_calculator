@@ -23,13 +23,13 @@ class Goal {
 
    static caloriesGoal(goal_level, bmi) {
         if (goal_level === "fat loss") {
-            return (parseInt(bmi) - 500)
+            return (bmi - 500)
         }
         else if (goal_level === "maintenance") {
-            return parseInt(bmi)
+            return bmi
         }
         else if (goal_level === "gain weight") {
-            return (parseInt(bmi) + 500)
+            return (bmi + 500)
         }
     } 
 

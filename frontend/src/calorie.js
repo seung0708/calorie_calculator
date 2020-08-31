@@ -29,6 +29,7 @@ class Calorie {
         document.getElementById("deleteButton").onclick = function() {
           document.getElementById("calories").remove()
           document.getElementById("totalCalories").removeAttribute('disabled')
+          document.getElementById("goalsForm").hidden = true;
       }
     }
 
