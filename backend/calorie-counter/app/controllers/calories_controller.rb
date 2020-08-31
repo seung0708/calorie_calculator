@@ -23,11 +23,7 @@ class CaloriesController < ApplicationController
                            bmi: params[:bmi]
     )
    
-      if @calorie.save
-        render json: @calorie, include: [:goals], status: 200
-      else 
-        render json: ("Calorie not saved").to_json
-      end 
+    render json: @calorie.save ? @calorie : {message: @calorie.errors.messages[:error][0]}
   end
 
   # PATCH/PUT /calories/1

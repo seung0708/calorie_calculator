@@ -10,24 +10,24 @@ document.addEventListener("DOMContentLoaded", () => {
 // Calories Form 
 const createForm = () => {
     const caloriesForm = document.createElement("div")
-    const parent = document.getElementById("container")
-    parent.appendChild(caloriesForm)
+    const div = document.getElementById("container")
+    div.appendChild(caloriesForm)
 
     caloriesForm.innerHTML +=  
     `
-    <form id="myForm">
+    <form id="myForm" name="myForm" onsubmit="return validateForm()">
         <label>Age:</label><br />
-        <input type="number" id="age"><br />
+        <input type="number" id="age" name="age"><br />
         <br>
         <label>Gender:</label><br />
         <input type="radio" name="genderS" id="gender" value="Male">Male</input>
         <input type="radio" name="genderS" id="gender" value="Female">Female</input>
         <br /><br>
         <label>Weight:</label><br />
-        <input type="number" id="weight" placeholder="in Pounds">
+        <input type="number" id="weight" name="weight" placeholder="in Pounds">
         <br /><br>
         <label>Height</label><br />
-        <input type="number" id="height" placeholder="in Inches">
+        <input type="number" id="height" name="weight" placeholder="in Inches">
         <br /><br>
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
         <input type="button" value="Reset" id="reset">
@@ -35,11 +35,13 @@ const createForm = () => {
     `
     caloriesForm.addEventListener("submit", formSubmit)
 
-    document.getElementById("myForm").onsubmit = function () {
+    /**document.getElementById("myForm").onsubmit = function () {
         document.getElementById("totalCalories").setAttribute("disabled", true)
-    } 
+    } **/
 
 }
+
+// Calories POST 
 const formSubmit = event => {
     event.preventDefault();
 
@@ -49,7 +51,7 @@ const formSubmit = event => {
     let weight = document.getElementById("weight").value
     let height = document.getElementById("height").value
     let bmi = Calorie.calculateCalories(age, gender, weight, height)
-    //debugger
+    debugger
     fetch(`${BASE_URL}calories`, {
         method: "POST",
         headers: {
@@ -80,6 +82,7 @@ const formSubmit = event => {
 
 }
 
+// Goals Form
 const goalsForm = () => {
     const goalsForm = document.createElement("form")
     goalsForm.setAttribute("id", "goalsForm")
@@ -111,6 +114,7 @@ const goalsForm = () => {
     
 }
 
+// Goals POST
 const goalSubmit = (e) => {
     e.preventDefault()
     
@@ -149,6 +153,7 @@ const goalSubmit = (e) => {
 }
 
 
+// Goals PATCH
 const updateGoals = () => {
     event.preventDefault();
     
@@ -184,6 +189,7 @@ const updateGoals = () => {
     
 }
 
+// Calories DELETE
 const deleteCalories = () => {
     event.preventDefault();
     
@@ -199,7 +205,7 @@ const deleteCalories = () => {
         })
     })
     .then(response => response.json())
-    .then(calorie.remove())
+    .then(json.remove())
 
 }
 
@@ -216,3 +222,30 @@ const resetBtn = () => {
 
 }
 
+
+const validateForm = () => {
+    debugger
+    var ageValid = document.forms["myForm"]["age"].value;
+    if (ageValid == "") {
+        alert("Not a valid Age")
+        return false;
+    }
+
+    var genderValid = document.forms["myForm"]['input[name="genderS"]:checked'].value;
+    if (genderValid == "" || genderValid == null) {
+        alert("Not a valid Gender")
+        return false;
+    }    
+
+    var weightValid = document.forms["myForm"]["weight"].value;
+    if (weightValid == "") {
+        alert("Not a valid Weight")
+        return false;
+    }
+
+    var heightValid = document.forms["myForm"]["height"].value;
+    if (heightValid== "") {
+        alert("Not a valid Age")
+        return false;
+    }
+}

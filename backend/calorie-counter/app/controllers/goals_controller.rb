@@ -13,6 +13,7 @@ class GoalsController < ApplicationController
 
   def create
     #binding.pry
+    binding.pry
     @calorie = Calorie.last
     @goal = @calorie.goals.build(goal_params)
    
