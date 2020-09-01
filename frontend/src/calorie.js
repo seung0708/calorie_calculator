@@ -1,3 +1,4 @@
+
 class Calorie {
     constructor(id,age, gender, weight, height, bmi) {
         this.id = id;

@@ -68,7 +68,7 @@ const formSubmit = event => {
         })
     })
     .then(response => response.json())
-    .then(calorie => {
+    .then(calorie => { console.log(calorie)
                 let u = new Calorie(calorie.id, calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.bmi) 
                 console.log(u)
                 u.viewCalories()
