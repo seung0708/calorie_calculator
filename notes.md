@@ -19,7 +19,7 @@
 # Rails
 [x] Follow Rails MVC and RESTful conventions. That means e.g.
     [x] a request GET/puppies out to be handled by the PuppiesController
-    [s] fetch puppies form the database using a Puppy ActiveRecord model, and return a list of puppies as JSON
+    [x] fetch puppies form the database using a Puppy ActiveRecord model, and return a list of puppies as JSON
 [x] Well-named variables and methods
 [x] Short, single-puprose methods
 
@@ -29,17 +29,3 @@
     [] When you look back at your commits with git log, the messages should describe each change
 [] Don't include changes in a commit that aren't related to the commit message 
 []
-
-
-table 
-    button that displays the table of calories by gender
-    some kind of classification
-
-
--maybe have total_calories in the Goal object.
--instead of activity_level, actually have a goal attribute (e.g. "exercise 1-2 times a week")
--calculate :total_calories in Goals. 
--display the current users goals and not someone else's 
-
-take the users info and calculate their BMI
-from there I create a new form where I take their weight loss goal and 

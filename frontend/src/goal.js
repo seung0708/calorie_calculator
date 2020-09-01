@@ -18,6 +18,14 @@ class Goal {
             <li></li>
         </ul>
         `
+        document.getElementById("update").onclick = function() {
+            const lists = Array.from(document.getElementsByClassName("goal-list"))
+            if (lists.slice(-1)[0]) {
+                lists.slice(-2)[0].remove()
+            }
+            console.log(lists)
+        
+        }
     }
 
 
@@ -34,22 +42,22 @@ class Goal {
     } 
 
   static updateCalories(goal_level, total_calories) {
-      if (goal_level === "maintenance" && total_calories === 1102) {
+      if (goal_level === "maintenance" && total_calories < 1500) {
         return total_calories + 500
       }
-      else if (goal_level === "gain weight" && total_calories === 1102) {
+      else if (goal_level === "gain weight" && total_calories < 1500) {
           return total_calories + 1000
       }
-      else if (goal_level === "fat loss" && total_calories === 1602) {
+      else if (goal_level === "fat loss" && total_calories > 1500) {
           return total_calories - 500
       }
-      else if (goal_level === "gain weight" && total_calories === 1602) {
+      else if (goal_level === "gain weight" && total_calories > 1500) {
           return total_calories + 500
       }
-      else if (goal_level === "fat loss" && total_calories === 2102) {
+      else if (goal_level === "fat loss" && total_calories > 2000) {
           return total_calories - 1000
       }
-      else if (goal_level === "maintence" && total_calories === 2102) {
+      else if (goal_level === "maintenance" && total_calories > 2000) {
           return total_calories - 500
       }
   }

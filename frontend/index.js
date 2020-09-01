@@ -1,17 +1,17 @@
 const BASE_URL = "http://localhost:3000/"
 
 document.addEventListener("DOMContentLoaded", () => {
-    createForm()
-    goalsForm()
-    resetBtn()
+    createForm();
+    goalsForm();
+    resetBtn();
 
 })
 
 // Calories Form 
 const createForm = () => {
-    const caloriesForm = document.createElement("div")
-    const div = document.getElementById("container")
-    div.appendChild(caloriesForm)
+    const caloriesForm = document.createElement("div");
+    const div = document.getElementById("container");
+    div.appendChild(caloriesForm);
 
     caloriesForm.innerHTML +=  
     `
@@ -34,7 +34,7 @@ const createForm = () => {
     </form>
     `
     caloriesForm.addEventListener("submit", formSubmit)
-
+    
     document.getElementById("myForm").onsubmit = function () {
         document.getElementById("totalCalories").setAttribute("disabled", true);
         document.getElementById("goalsForm").hidden = false;
@@ -52,7 +52,7 @@ const formSubmit = event => {
     let weight = parseInt(document.getElementById("weight").value)
     let height = parseInt(document.getElementById("height").value)
     let bmi = Calorie.calculateCalories(age, gender, weight, height)
-    debugger
+    //debugger
     fetch(`${BASE_URL}calories`, {
         method: "POST",
         headers: {
@@ -69,15 +69,10 @@ const formSubmit = event => {
     })
     .then(response => response.json())
     .then(calorie => {
-            if (calorie.message) {
-                alert(calorie.message)
-            } 
-            else { 
                 let u = new Calorie(calorie.id, calorie.age, calorie.gender, calorie.weight, calorie.height, calorie.bmi) 
                 console.log(u)
                 u.viewCalories()
-            }
-    })
+            })
 
 
 
@@ -126,7 +121,7 @@ const goalSubmit = (e) => {
     let goal = document.getElementById("goal_level")
     let goal_level = goal.options[goal.selectedIndex].value
     let total_calories = Goal.caloriesGoal(goal_level, bmi)
-    debugger
+    //debugger
     fetch(`${BASE_URL}goals`, {
         method: "POST",
         headers: {
@@ -183,12 +178,12 @@ const updateGoals = () => {
             alert(goal.message)
         }
         else {
-            let g = new Goal(goal.id, goal.goal_level, goal.total_calories)          
+            let g = new Goal(goal.id, goal.goal_level, goal.total_calories)    
             g.viewGoals()
-                
+        
         }
     })
-    
+    //debugger
 }
 
 // Calories DELETE
