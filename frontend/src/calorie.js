@@ -28,9 +28,7 @@ class Calorie {
         deleteButton.addEventListener("click", deleteCalories)
 
         document.getElementById("deleteButton").onclick = function() {
-          document.getElementById("calories").remove()
-          document.getElementById("totalCalories").removeAttribute('disabled')
-          document.getElementById("goalsForm").hidden = true;
+          window.location.reload()
       }
     }
 

@@ -3,7 +3,6 @@ const BASE_URL = "http://localhost:3000/"
 document.addEventListener("DOMContentLoaded", () => {
     createForm();
     goalsForm();
-    resetBtn();
 
 })
 
@@ -30,7 +29,7 @@ const createForm = () => {
         <input type="number" id="height" placeholder="in inches" min="48" max="84" required>
         <br /><br>
         <input type="submit" value="Calculate Calories" id="totalCalories"><br />
-        <input type="button" value="Reset" id="reset">
+        
     </form>
     `
     caloriesForm.addEventListener("submit", formSubmit)
@@ -183,7 +182,7 @@ const updateGoals = () => {
         
         }
     })
-    //debugger
+    
 }
 
 // Calories DELETE
@@ -205,15 +204,4 @@ const deleteCalories = () => {
 }
 
 
-const resetBtn = () => {
-    document.getElementById('reset').onclick = function() {
-
-        document.getElementById("age").value = "";
-        document.getElementById("gender").value = "";
-        document.getElementById("weight").value = "";
-        document.getElementById("height").value = "";
-        document.getElementById("totalCalories").removeAttribute('disabled')
-    }
-
-}
 

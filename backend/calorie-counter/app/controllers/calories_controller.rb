@@ -22,8 +22,9 @@ class CaloriesController < ApplicationController
                            height: params[:height],
                            bmi: params[:bmi]
     )
-   
-    render json: @calorie.save! ? @calorie : {message: @calorie.errors.messages[:error][0]}
+    if @calorie.save
+      render json: @calorie
+    end 
   end
 
   # PATCH/PUT /calories/1
