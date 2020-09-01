@@ -103,8 +103,8 @@ const goalsForm = () => {
     document.getElementById("goalsForm").onsubmit = function() {
             const updateButton = document.getElementById("update")
             updateButton.hidden = false
-            
             updateButton.addEventListener("click", updateGoals)
+            document.getElementById("goalCalories").setAttribute("disabled", true);
     }
 
     

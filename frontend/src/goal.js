@@ -42,24 +42,25 @@ class Goal {
     } 
 
   static updateCalories(goal_level, total_calories) {
-      if (goal_level === "maintenance" && total_calories < 1500) {
-        return total_calories + 500
-      }
-      else if (goal_level === "gain weight" && total_calories < 1500) {
-          return total_calories + 1000
-      }
-      else if (goal_level === "fat loss" && total_calories > 1500) {
+      if (goal_level === "fat loss" && total_calories <= 2000) {
           return total_calories - 500
       }
-      else if (goal_level === "gain weight" && total_calories > 1500) {
+      else if (goal_level === "fat loss" && total_calories >= 2000) {
+        return total_calories - 1000
+      }
+      else if (goal_level === "maintenance" && total_calories <= 2000) {
           return total_calories + 500
       }
-      else if (goal_level === "fat loss" && total_calories > 2000) {
-          return total_calories - 1000
+      else if (goal_level === "maintenance" && total_calories >= 2000) {
+        return total_calories
       }
-      else if (goal_level === "maintenance" && total_calories > 2000) {
-          return total_calories - 500
+      else if (goal_level === "gain weight" && total_calories <= 2000) {
+        return total_calories + 500
       }
-  }
+      else if (goal_level === "gain weight" && total_calories >= 2000) {
+        return total_calories +  500
+      }
+    
+  }  
 
 }

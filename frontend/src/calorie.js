@@ -11,7 +11,7 @@ class Calorie {
 
     viewCalories() {
         const viewCalories = document.getElementById("calorieValues")
-      
+        
         viewCalories.innerHTML +=
         `
         
