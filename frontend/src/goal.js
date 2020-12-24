@@ -23,7 +23,7 @@ class Goal {
             if (lists.slice(-1)[0]) {
                 lists.slice(-2)[0].remove()
             }
-            console.log(lists)
+            console.log(lists) 
         
         }
     }

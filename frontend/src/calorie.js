@@ -7,7 +7,7 @@ class Calorie {
         this.weight = weight;
         this.height = height;
         this.bmi = bmi
-    }
+    } 
 
     viewCalories() {
         const viewCalories = document.getElementById("calorieValues")

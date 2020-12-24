@@ -3,7 +3,7 @@ body {
 }
 
 .parent {
-    position: absolute;
+    position: flex;
     left: 440px;
     height: 525px;
     width: 360px;
@@ -30,8 +30,8 @@ h1 {
 
 .view {
     list-style-type: none;
-    position: absolute;
-    top: 50px; 
+    position: flex;
+    top: 50x; 
     left: 100px;
     height: 220px;
     width: 240px;
@@ -48,28 +48,30 @@ ul.list {
 }
 
 #resources {
-    position: absolute;
+    position: flex;
     top: 100px;
     right: 50px;
 }
 
 #totalResults {
-    position: absolute;
+    position: flex;
     top: 300px;
     text-align: center;
 }
 
 #goalsForm {
-    position: absolute;
+    position: flex;
     top: 340px;
     
 }
 
 #results {
-    position: absolute;
+    position: flex;
     top: 420px;
 }
 
 ul.goal-list {
+    position: flex;
     list-style-type: none;
+    
 }
